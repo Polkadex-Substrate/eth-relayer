@@ -1,4 +1,4 @@
-module github.com/snowfork/polkadot-ethereum/relayer
+module github.com/Polkadex-Substrate/eth-relayer
 
 go 1.14
 
@@ -14,7 +14,6 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/magefile/mage v1.11.0
 	github.com/magiconair/properties v1.8.4 // indirect
-	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mattn/go-runewidth v0.0.10 // indirect
 	github.com/mattn/go-sqlite3 v1.14.5
 	github.com/mgechev/revive v1.0.3 // indirect

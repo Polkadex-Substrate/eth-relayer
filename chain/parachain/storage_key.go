@@ -5,7 +5,7 @@ import (
 
 	"github.com/snowfork/go-substrate-rpc-client/v2/scale"
 	"github.com/snowfork/go-substrate-rpc-client/v2/types"
-	chainTypes "github.com/snowfork/polkadot-ethereum/relayer/substrate"
+	chainTypes "github.com/Polkadex-Substrate/eth-relayer/substrate"
 )
 
 var IndexingPrefix = []byte("commitment")

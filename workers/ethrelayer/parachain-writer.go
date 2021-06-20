@@ -9,9 +9,9 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"github.com/snowfork/go-substrate-rpc-client/v2/types"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/ethereum"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/parachain"
+	"github.com/Polkadex-Substrate/eth-relayer/chain"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/ethereum"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/parachain"
 )
 
 type ParachainPayload struct {

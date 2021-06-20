@@ -12,7 +12,7 @@ import (
 	"github.com/sirupsen/logrus"
 	logtest "github.com/sirupsen/logrus/hooks/test"
 
-	"github.com/snowfork/polkadot-ethereum/relayer/workers"
+	"github.com/Polkadex-Substrate/eth-relayer/workers"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/sync/errgroup"
 )

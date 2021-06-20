@@ -9,8 +9,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/parachain"
-	"github.com/snowfork/polkadot-ethereum/relayer/crypto/sr25519"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/parachain"
+	"github.com/Polkadex-Substrate/eth-relayer/crypto/sr25519"
 )
 
 func TestConnect(t *testing.T) {

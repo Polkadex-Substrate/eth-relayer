@@ -9,7 +9,7 @@ import (
 	"github.com/snowfork/go-substrate-rpc-client/v2/types"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/snowfork/polkadot-ethereum/relayer/substrate"
+	"github.com/Polkadex-Substrate/eth-relayer/substrate"
 )
 
 type Message interface{}

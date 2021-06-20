@@ -3,7 +3,7 @@ package parachain
 import (
 	"testing"
 
-	chainTypes "github.com/snowfork/polkadot-ethereum/relayer/substrate"
+	chainTypes "github.com/Polkadex-Substrate/eth-relayer/substrate"
 	"github.com/stretchr/testify/assert"
 )
 

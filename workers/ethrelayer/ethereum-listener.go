@@ -6,7 +6,7 @@ package ethrelayer
 import (
 	"context"
 
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+// 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	etypes "github.com/ethereum/go-ethereum/core/types"
 
@@ -14,19 +14,19 @@ import (
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/snowfork/polkadot-ethereum/relayer/chain"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/ethereum"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/ethereum/syncer"
-	"github.com/snowfork/polkadot-ethereum/relayer/contracts/basic"
-	"github.com/snowfork/polkadot-ethereum/relayer/contracts/incentivized"
+	"github.com/Polkadex-Substrate/eth-relayer/chain"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/ethereum"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/ethereum/syncer"
+// 	"github.com/Polkadex-Substrate/eth-relayer/contracts/basic"
+// 	"github.com/Polkadex-Substrate/eth-relayer/contracts/incentivized"
 )
 
 // EthereumListener streams the Ethereum blockchain for application events
 type EthereumListener struct {
 	config                      *ethereum.Config
 	conn                        *ethereum.Connection
-	basicOutboundChannel        *basic.BasicOutboundChannel
-	incentivizedOutboundChannel *incentivized.IncentivizedOutboundChannel
+// 	basicOutboundChannel        *basic.BasicOutboundChannel
+// 	incentivizedOutboundChannel *incentivized.IncentivizedOutboundChannel
 	mapping                     map[common.Address]string
 	payloads                    chan<- ParachainPayload
 	headerSyncer                *syncer.Syncer
@@ -42,8 +42,8 @@ func NewEthereumListener(
 	return &EthereumListener{
 		config:                      config,
 		conn:                        conn,
-		basicOutboundChannel:        nil,
-		incentivizedOutboundChannel: nil,
+// 		basicOutboundChannel:        nil,
+// 		incentivizedOutboundChannel: nil,
 		mapping:                     make(map[common.Address]string),
 		payloads:                    payloads,
 		headerSyncer:                nil,
@@ -68,20 +68,20 @@ func (li *EthereumListener) Start(cxt context.Context, eg *errgroup.Group, initB
 		return closeWithError(err)
 	}
 
-	basicOutboundChannel, err := basic.NewBasicOutboundChannel(common.HexToAddress(li.config.Channels.Basic.Outbound), li.conn.GetClient())
-	if err != nil {
-		return closeWithError(err)
-	}
-	li.basicOutboundChannel = basicOutboundChannel
-
-	incentivizedOutboundChannel, err := incentivized.NewIncentivizedOutboundChannel(common.HexToAddress(li.config.Channels.Incentivized.Outbound), li.conn.GetClient())
-	if err != nil {
-		return closeWithError(err)
-	}
-	li.incentivizedOutboundChannel = incentivizedOutboundChannel
-
-	li.mapping[common.HexToAddress(li.config.Channels.Basic.Outbound)] = "BasicInboundChannel.submit"
-	li.mapping[common.HexToAddress(li.config.Channels.Incentivized.Outbound)] = "IncentivizedInboundChannel.submit"
+// 	basicOutboundChannel, err := basic.NewBasicOutboundChannel(common.HexToAddress(li.config.Channels.Basic.Outbound), li.conn.GetClient())
+// 	if err != nil {
+// 		return closeWithError(err)
+// 	}
+// 	li.basicOutboundChannel = basicOutboundChannel
+//
+// 	incentivizedOutboundChannel, err := incentivized.NewIncentivizedOutboundChannel(common.HexToAddress(li.config.Channels.Incentivized.Outbound), li.conn.GetClient())
+// 	if err != nil {
+// 		return closeWithError(err)
+// 	}
+// 	li.incentivizedOutboundChannel = incentivizedOutboundChannel
+//
+// 	li.mapping[common.HexToAddress(li.config.Channels.Basic.Outbound)] = "BasicInboundChannel.submit"
+// 	li.mapping[common.HexToAddress(li.config.Channels.Incentivized.Outbound)] = "IncentivizedInboundChannel.submit"
 
 	headersIn := make(chan *gethTypes.Header, 5)
 	li.headerSyncer = syncer.NewSyncer(
@@ -147,24 +147,24 @@ func (li *EthereumListener) processEventsAndHeaders(
 				continue
 			}
 
-			finalizedBlockNumber := gethheader.Number.Uint64() - descendantsUntilFinal
+// 			finalizedBlockNumber := gethheader.Number.Uint64() - descendantsUntilFinal
 			var events []*etypes.Log
 
-			filterOptions := bind.FilterOpts{Start: finalizedBlockNumber, End: &finalizedBlockNumber, Context: ctx}
+// 			filterOptions := bind.FilterOpts{Start: finalizedBlockNumber, End: &finalizedBlockNumber, Context: ctx}
 
-			basicEvents, err := li.queryBasicEvents(li.basicOutboundChannel, &filterOptions)
-			if err != nil {
-				li.log.WithError(err).Error("Failure fetching event logs")
-				return err
-			}
-			events = append(events, basicEvents...)
-
-			incentivizedEvents, err := li.queryIncentivizedEvents(li.incentivizedOutboundChannel, &filterOptions)
-			if err != nil {
-				li.log.WithError(err).Error("Failure fetching event logs")
-				return err
-			}
-			events = append(events, incentivizedEvents...)
+// 			basicEvents, err := li.queryBasicEvents(li.basicOutboundChannel, &filterOptions)
+// 			if err != nil {
+// 				li.log.WithError(err).Error("Failure fetching event logs")
+// 				return err
+// 			}
+// 			events = append(events, basicEvents...)
+//
+// 			incentivizedEvents, err := li.queryIncentivizedEvents(li.incentivizedOutboundChannel, &filterOptions)
+// 			if err != nil {
+// 				li.log.WithError(err).Error("Failure fetching event logs")
+// 				return err
+// 			}
+// 			events = append(events, incentivizedEvents...)
 
 			messages, err := li.makeOutgoingMessages(ctx, hcs, events)
 			if err != nil {
@@ -176,49 +176,49 @@ func (li *EthereumListener) processEventsAndHeaders(
 	}
 }
 
-func (li *EthereumListener) queryBasicEvents(contract *basic.BasicOutboundChannel, options *bind.FilterOpts) ([]*etypes.Log, error) {
-	var events []*etypes.Log
+// func (li *EthereumListener) queryBasicEvents(contract *basic.BasicOutboundChannel, options *bind.FilterOpts) ([]*etypes.Log, error) {
+// 	var events []*etypes.Log
+//
+// 	iter, err := contract.FilterMessage(options)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+//
+// 	for {
+// 		more := iter.Next()
+// 		if !more {
+// 			err = iter.Error()
+// 			if err != nil {
+// 				return nil, err
+// 			}
+// 			break
+// 		}
+// 		events = append(events, &iter.Event.Raw)
+// 	}
+// 	return events, nil
+// }
 
-	iter, err := contract.FilterMessage(options)
-	if err != nil {
-		return nil, err
-	}
-
-	for {
-		more := iter.Next()
-		if !more {
-			err = iter.Error()
-			if err != nil {
-				return nil, err
-			}
-			break
-		}
-		events = append(events, &iter.Event.Raw)
-	}
-	return events, nil
-}
-
-func (li *EthereumListener) queryIncentivizedEvents(contract *incentivized.IncentivizedOutboundChannel, options *bind.FilterOpts) ([]*etypes.Log, error) {
-	var events []*etypes.Log
-
-	iter, err := contract.FilterMessage(options)
-	if err != nil {
-		return nil, err
-	}
-
-	for {
-		more := iter.Next()
-		if !more {
-			err = iter.Error()
-			if err != nil {
-				return nil, err
-			}
-			break
-		}
-		events = append(events, &iter.Event.Raw)
-	}
-	return events, nil
-}
+// func (li *EthereumListener) queryIncentivizedEvents(contract *incentivized.IncentivizedOutboundChannel, options *bind.FilterOpts) ([]*etypes.Log, error) {
+// 	var events []*etypes.Log
+//
+// 	iter, err := contract.FilterMessage(options)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+//
+// 	for {
+// 		more := iter.Next()
+// 		if !more {
+// 			err = iter.Error()
+// 			if err != nil {
+// 				return nil, err
+// 			}
+// 			break
+// 		}
+// 		events = append(events, &iter.Event.Raw)
+// 	}
+// 	return events, nil
+// }
 
 func (li *EthereumListener) makeOutgoingMessages(
 	ctx context.Context,

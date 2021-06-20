@@ -9,8 +9,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/ethereum"
-	"github.com/snowfork/polkadot-ethereum/relayer/crypto/secp256k1"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/ethereum"
+	"github.com/Polkadex-Substrate/eth-relayer/crypto/secp256k1"
 )
 
 func TestConnect(t *testing.T) {

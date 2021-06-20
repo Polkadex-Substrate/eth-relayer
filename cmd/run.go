@@ -6,7 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/snowfork/polkadot-ethereum/relayer/core"
+	"github.com/Polkadex-Substrate/eth-relayer/core"
 )
 
 func runCmd() *cobra.Command {
@@ -14,7 +14,7 @@ func runCmd() *cobra.Command {
 		Use:     "run",
 		Short:   "Start the relay service",
 		Args:    cobra.ExactArgs(0),
-		Example: "artemis-relay run",
+		Example: "polkadex-eth-relay run",
 		RunE:    RunFn,
 	}
 	return cmd

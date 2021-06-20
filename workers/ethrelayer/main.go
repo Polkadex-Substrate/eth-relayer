@@ -11,9 +11,9 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/snowfork/go-substrate-rpc-client/v2/types"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/ethereum"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/parachain"
-	"github.com/snowfork/polkadot-ethereum/relayer/crypto/sr25519"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/ethereum"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/parachain"
+	"github.com/Polkadex-Substrate/eth-relayer/crypto/sr25519"
 )
 
 type Worker struct {
@@ -70,7 +70,7 @@ func (w *Worker) Start(ctx context.Context, eg *errgroup.Group) error {
 	if err != nil {
 		return err
 	}
-	w.log.WithField("blockNumber", finalizedBlockNumber).Debug("Retrieved finalized block number from parachain")
+	w.log.WithField("blockNumber", finalizedBlockNumber).Debug("Retrieved finalized Ethereum block number from polkadex")
 
 	err = listener.Start(ctx, eg, finalizedBlockNumber+1, uint64(w.ethconfig.DescendantsUntilFinal))
 	if err != nil {

@@ -10,7 +10,7 @@ import (
 	gethCommon "github.com/ethereum/go-ethereum/common"
 	gethTypes "github.com/ethereum/go-ethereum/core/types"
 	gethTrie "github.com/ethereum/go-ethereum/trie"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/ethereum"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/ethereum"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/snowfork/ethashproof"

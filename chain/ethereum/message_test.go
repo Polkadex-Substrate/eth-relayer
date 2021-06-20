@@ -9,8 +9,8 @@ import (
 	"github.com/ethereum/go-ethereum/rlp"
 	gethTrie "github.com/ethereum/go-ethereum/trie"
 	"github.com/sirupsen/logrus/hooks/test"
-	"github.com/snowfork/polkadot-ethereum/relayer/chain/ethereum"
-	"github.com/snowfork/polkadot-ethereum/relayer/substrate"
+	"github.com/Polkadex-Substrate/eth-relayer/chain/ethereum"
+	"github.com/Polkadex-Substrate/eth-relayer/substrate"
 	"github.com/stretchr/testify/assert"
 )
 

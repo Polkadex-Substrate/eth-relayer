@@ -16,8 +16,8 @@ import (
 var configFile string
 
 var rootCmd = &cobra.Command{
-	Use:          "artemis-relay",
-	Short:        "Artemis Relay is a bridge between Ethereum and Polkadot",
+	Use:          "polkadex-eth-relay",
+	Short:        "Polkadex Ethereum Relayer will relay Ethereum blocks to Polkadex Runtime",
 	SilenceUsage: true,
 }
 
@@ -26,8 +26,8 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&configFile, "config", "", "config file")
 	rootCmd.AddCommand(runCmd())
 	rootCmd.AddCommand(getBlockCmd())
-	rootCmd.AddCommand(fetchMessagesCmd())
-	rootCmd.AddCommand(subBeefyCmd())
+// 	rootCmd.AddCommand(fetchMessagesCmd())
+// 	rootCmd.AddCommand(subBeefyCmd())
 }
 
 func initConfig() {
@@ -42,7 +42,7 @@ func initConfig() {
 			os.Exit(1)
 		}
 
-		viper.AddConfigPath(path.Join(home, ".config", "artemis-relay"))
+		viper.AddConfigPath(path.Join(home, ".config", "polkadex-eth-relay"))
 		viper.AddConfigPath(".")
 		viper.SetConfigName("config")
 		viper.SetConfigType("toml")
