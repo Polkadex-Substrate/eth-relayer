@@ -17,7 +17,7 @@ var configFile string
 
 var rootCmd = &cobra.Command{
 	Use:          "polkadex-eth-relay",
-	Short:        "Polkadex Ethereum Relayer will relay Ethereum blocks to Polkadex Runtime",
+	Short:        "Polkadex Ethereum Relayer relays Ethereum block headers to Polkadex Runtime",
 	SilenceUsage: true,
 }
 
