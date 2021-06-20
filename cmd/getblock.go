@@ -35,7 +35,7 @@ func getBlockCmd() *cobra.Command {
 		Use:     "getblock",
 		Short:   "Retrieve a block, either specified by hash or the latest finalized block",
 		Args:    cobra.ExactArgs(0),
-		Example: "artemis-relay getblock",
+		Example: "polkadex-eth-relay getblock",
 		RunE:    GetBlockFn,
 	}
 	cmd.Flags().StringP("block", "b", "", "Block hash")

@@ -1,6 +1,7 @@
 package core
 
 import (
+"fmt"
 	"github.com/sirupsen/logrus"
 
 	"github.com/Polkadex-Substrate/eth-relayer/workers"
@@ -18,7 +19,7 @@ func (re *Relay) Run() error {
 	}
 
 	var pool workers.WorkerPool
-
+	fmt.Println("Running the worker")
 	if config.Workers.EthRelayer.Enabled {
 		ethrelayerFactory := func() (workers.Worker, *workers.WorkerConfig, error) {
 			return ethrelayer.NewWorker(
@@ -28,6 +29,7 @@ func (re *Relay) Run() error {
 			), &config.Workers.EthRelayer, nil
 		}
 		pool = append(pool, ethrelayerFactory)
+		fmt.Println("Creating the Eth Relayer Worker")
 	}
 
 // 	if config.Workers.BeefyRelayer.Enabled {

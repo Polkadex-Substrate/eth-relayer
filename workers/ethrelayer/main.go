@@ -4,6 +4,7 @@
 package ethrelayer
 
 import (
+    "fmt"
 	"context"
 
 	"golang.org/x/sync/errgroup"
@@ -39,6 +40,7 @@ func (w *Worker) Name() string {
 }
 
 func (w *Worker) Start(ctx context.Context, eg *errgroup.Group) error {
+    fmt.Println("Starting Ethereum Relayer Worker...")
 	err := w.connect(ctx)
 	if err != nil {
 		return err
