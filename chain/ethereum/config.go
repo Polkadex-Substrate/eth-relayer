@@ -5,17 +5,17 @@ type Config struct {
 // 	BeefyPrivateKey                string         `mapstructure:"beefy-private-key"`
 // 	ParachainCommitmentsPrivateKey string         `mapstructure:"parachain-commitments-private-key"`
 	DescendantsUntilFinal          byte           `mapstructure:"descendants-until-final"`
-// 	Channels                       ChannelsConfig `mapstructure:"channels"`
+	Channels                       ChannelsConfig `mapstructure:"channels"`
 // 	BeefyLightClient               string         `mapstructure:"beefylightclient"`
 	StartBlock                     uint64         `mapstructure:"startblock"`
 }
 
 type ChannelsConfig struct {
 	Basic        ChannelConfig `mapstructure:"basic"`
-	Incentivized ChannelConfig `mapstructure:"incentivized"`
+	// Incentivized ChannelConfig `mapstructure:"incentivized"`
 }
 
 type ChannelConfig struct {
-	Inbound  string `mapstructure:"inbound"`
+	// Inbound  string `mapstructure:"inbound"`
 	Outbound string `mapstructure:"outbound"`
 }
